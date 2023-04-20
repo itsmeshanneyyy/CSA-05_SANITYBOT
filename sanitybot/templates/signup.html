@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}" />
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>SanityBot | Sign up</title>
+  <link rel="icon" href="{{ url_for('static', filename='/images/robot_logo.svg') }}" type="image">
+</head>
+
+<body>
+  {% with messages = get_flashed_messages(with_categories=true) %} {% if
+  messages %} {% for category, message in messages %} {% if category ==
+  'error' %}
+  <div class="alert-error" role="alert">
+    {{ message }}
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  </div>
+  {% else %}
+  <div class="alert-success" role="alert">
+    {{ message }}
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  </div>
+  {% endif %} {% endfor %} {% endif %} {% endwith %}
+  <main>
+    <!-- landingpage -->
+    <div class="wrapper light scroll-bar">
+      <header>
+        <div class="container1">
+          <div class="wrapper2">
+            <div class="logo">
+              <img class="logo_img" src="{{ url_for('static', filename='/images/robot_logo.svg') }}" alt="logo">
+              <h3>SanityBot</h3>
+            </div>
+            <div class="links">
+              <ul class="main">
+                <li><a href="{{ url_for('views.welcome') }}">Welcome</a></li>
+                <li><a href="{{ url_for('views.postpartum') }}">Postpartum</a></li>
+                <li><a href="{{ url_for('auth.login') }}" style="color:#46A2FF">Log in</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="overlay"></div>
+          <div class="hamburger">
+            <div class="bar"></div>
+          </div>
+        </div>
+      </header>
+
+      <div class="container1">
+
+        <!-- SIGN UP FORM -->
+        <form action="" class="sign-in-form" method="POST">
+          <div class="row">
+            <div class="col">
+              <h2 class="title">Sign up</h2>
+              <div class="flex">
+                <div class="input-field">
+                  <i class="fas fa-user"></i>
+                  <input type="text" placeholder="First Name" name="signup_first_name" required />
+                </div>
+                <div class="input-field">
+                  <i class="fas fa-user"></i>
+                  <input type="text" placeholder="Middle Name" name="signup_middle_name" required />
+                </div>
+                <div class="input-field">
+                  <i class="fas fa-user"></i>
+                  <input type="text" placeholder="Last Name" name="signup_last_name" required />
+                </div>
+              </div>
+              <div class="flex">
+                <div class="input-field">
+                  <i class="fas fa-envelope"></i>
+                  <input type="email" placeholder="Email" name="signup_email" required />
+                </div>
+                <div class="input-field">
+                  <i class="fa fa-map-marker"></i>
+                  <input type="text" placeholder="Address" name="signup_address" required />
+                </div>
+              </div>
+              <div class="flex">
+                <div class="input-field">
+                  <i class="fas fa-lock"></i>
+                  <input type="password" placeholder="Password" name="signup_password" minlength="6" required />
+                </div>
+                <div class="input-field">
+                  <i class="fas fa-lock"></i>
+                  <input type="password" placeholder="Confirm Password" name="signup_cpassword" minlength="6"
+                    required />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Socio Demographic Profile -->
+          <div class="row">
+            <div class="col">
+              <h3 class="title1">Socio-Demographic Profile</h3>
+              <div class="flex">
+                <div class="input-field">
+                  <i></i>
+                  <input type="number" placeholder="Age" name="signup_age" required />
+                </div>
+                <div class="input-field1 dropdown" data-type="selectors" data-name="marital">
+                  <select aria-label="Marital" name="signup_marital" id="marital" title="Marital" required>
+                    <option value="" disabled selected>Marital Status</option>
+                    <option value="Single">Single</option>
+                    <option value="Married">Married</option>
+                    <option value="Separated">Separated</option>
+                    <option value="Common-law partner">Common-law partner</option>
+                    <option value="Widowed">Widowed</option>
+                  </select>
+                </div>
+                <div class="input-field1 dropdown" data-type="selectors" data-name="educ">
+                  <select aria-label="Educational" name="signup_educ" id="educ" title="Educational" required>
+                    <option value="" disabled selected>Educational Attainment</option>
+                    <option value="Elementary School">Elementary School</option>
+                    <option value="High School">High School</option>
+                    <option value="College">College</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex">
+            <div class="input-field1 dropdown" data-type="selectors" data-name="employ">
+              <select aria-label="Employment" name="signup_employ" id="employ" title="Employment" required>
+                <option value="" disabled selected>Employment Status</option>
+                <option value="Employed">Employed</option>
+                <option value="Unemployed">Unemployed</option>
+              </select>
+            </div>
+            <div class="input-field1 dropdown" data-type="selectors" data-name="income">
+              <select class="selected" aria-label="Income" name="signup_income" id="income" title="Month" required>
+                <option value="" disabled selected>Family Monthly Income</option>
+                <option value="Less than 5,000">Less than 5,000</option>
+                <option value="5,000 - 10,000">5,000 - 10,000</option>
+                <option value="10,000 - 15,000">10,000 - 15,000</option>
+                <option value="15,000 - 20,000">15,000 - 20,000</option>
+                <option value="Greater than or equal to 20,000">Greater than or equal to 20,000</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <form>
+                <div class="flex1">
+                  <div class="box">
+                    <label for="sdp1">Have you been previously diagnosed with a psychiatric condition?</label>
+                    <div class="option-wrapper">
+                      <input type="radio" id="sdp1" name="sdp1" value="Yes">
+                      <label for="sdp1">Yes</label>
+                      <input type="radio" id="sdp1" name="sdp1" value="No">
+                      <label for="sdp1">No</label>
+                    </div>
+                  </div>
+                  <div class="box">
+                    <label for="sdp2">Do you have a family history of psychiatric illness?</label>
+                    <div class="option-wrapper">
+                      <input type="radio" id="sdp2" name="sdp2" value="Yes">
+                      <label for="sdp2">Yes</label>
+                      <input type="radio" id="sdp2" name="sdp2" value="No">
+                      <label for="sdp2">No</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex1">
+                  <div class="box">
+                    <label for="sdp3">Currently smoking?</label>
+                    <div class="option-wrapper">
+                      <input type="radio" id="sdp3" name="sdp3" value="Yes">
+                      <label for="sdp3">Yes</label>
+                      <input type="radio" id="sdp3" name="sdp3" value="No">
+                      <label for="sdp3">No</label>
+                    </div>
+                  </div>
+                  <div class="box">
+                    <label for="sdp4">Currently with alcohol intake?</label>
+                    <div class="option-wrapper">
+                      <input type="radio" id="sdp4" name="sdp4" value="Yes">
+                      <label for="sdp4">Yes</label>
+                      <input type="radio" id="sdp4" name="sdp4" value="No">
+                      <label for="sdp4">No</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex1">
+                  <div class="box">
+                    <label for="sdp5">History of physical abuse?</label>
+                    <div class="option-wrapper">
+                      <input type="radio" id="sdp5" name="sdp5" value="Yes">
+                      <label for="sdp5">Yes</label>
+                      <input type="radio" id="sdp5" name="sdp5" value="No">
+                      <label for="sdp5">No</label>
+                    </div>
+                  </div>
+                  <div class="box">
+                    <label for="sdp6">History of sexual abuse?</label>
+                    <div class="option-wrapper">
+                      <input type="radio" id="sdp6" name="sdp6" value="Yes">
+                      <label for="sdp6">Yes</label>
+                      <input type="radio" id="sdp6" name="sdp6" value="No">
+                      <label for="sdp6">No</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex1">
+                  <div class="box">
+                    <label for="sdp7">Status of child?</label>
+                    <div class="option-wrapper">
+                      <input type="radio" id="sdp7" name="sdp7" value="Alive">
+                      <label for="sdp7">Alive</label>
+                      <input type="radio" id="sdp7" name="sdp7" value="Died">
+                      <label for="sdp7">Died</label>
+                    </div>
+                  </div>
+                  <div class="box">
+                    <label for="sdp8">Planned pregnancy?</label>
+                    <div class="option-wrapper">
+                      <input type="radio" id="sdp8" name="sdp8" value="Yes">
+                      <label for="sdp8">Yes</label>
+                      <input type="radio" id="sdp8" name="sdp8" value="No">
+                      <label for="sdp8">No</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex2">
+                  <div class="box">
+                    <label for="sdp9">Currently breastfeeding?</label>
+                    <div class="option-wrapper">
+                      <input type="radio" id="sdp9" name="sdp9" value="Yes">
+                      <label for="sdp9">Yes</label>
+                      <input type="radio" id="sdp9" name="sdp9" value="No">
+                      <label for="sdp9">No</label>
+                    </div>
+                  </div>
+                </div>
+
+            </div>
+          </div>
+
+          <!-- Pregnancy Records -->
+          <div class="row">
+            <div class="col">
+              <h3 class="title1">Pregnancy Records</h3>
+              <div class="flex">
+                <div class="input-field">
+                  <i></i>
+                  <input type="number" placeholder="No. of Pregnancies" name="signup_numpreg" required />
+                </div>
+                <div class="input-field">
+                  <i></i>
+                  <input type="number" placeholder="No. of Living Children" name="signup_livechild" required />
+                </div>
+              </div>
+              <div class="flex">
+                <div class="input-field">
+                  <i></i>
+                  <input type="number" placeholder="No. of Premature Births" name="signup_numpremature" required />
+                </div>
+                <div class="input-field">
+                  <i></i>
+                  <input type="number" placeholder="No. of Miscarriage" name="signup_nummiscarriage" required />
+                </div>
+              </div>
+              <div class="flex">
+                <div class="input-field">
+                  <i></i>
+                  <input type="number" placeholder="OB Score" name="signup_obscore" required />
+                </div>
+                <div class="input-field1 dropdown" data-type="selectors" data-name="comorbidities">
+                  <select aria-label="Comorbidities" name="signup_comor" id="comor" title="Comorbidities" required>
+                    <option value="" disabled selected>With Medical comorbidities?</option>
+                    <option value="Hypertension">Hypertension</option>
+                    <option value="Diabetes Mellitus">Diabetes Mellitus</option>
+                    <option value="Heart Disease">Heart Disease</option>
+                    <option value="Thyroid disease">Thyroid disease</option>
+                    <option value="Others">Others</option>
+                  </select>
+                </div>
+              </div>
+              <div class="flex">
+                <div class="input-field1 dropdown" data-type="selectors" data-name="delivery">
+                  <select aria-label="Delivery" name="signup_delivery" id="delivery" title="Delivery" required>
+                    <option value="" disabled selected>Mode of Delivery</option>
+                    <option value="Vaginal">Vaginal</option>
+                    <option value="Abdominal">Abdominal</option>
+                  </select>
+                </div>
+              </div>
+              <label class="title1">If Vaginal delivery:</label>
+              <div class="flex2">
+                <label for="pr1">Induction of labor?</label>
+                <div class="option-wrapper">
+                  <input type="radio" id="pr1" name="pr1" value="Yes">
+                  <label for="pr1">Yes</label>
+                  <input type="radio" id="pr1" name="pr1" value="No">
+                  <label for="pr1">No</label>
+                </div>
+              </div>
+              <div class="flex2">
+                <label for="pr2">Epidural anesthesia given?</label>
+                <div class="option-wrapper">
+                  <input type="radio" id="pr2" name="pr2" value="Yes">
+                  <label for="pr2">Yes</label>
+                  <input type="radio" id="pr2" name="pr2" value="No">
+                  <label for="pr2">No</label>
+                </div>
+              </div>
+              <div class="flex2">
+                <label for="pr3">Hours of labor</label>
+                <div class="option-wrapper">
+                  <input type="radio" id="pr3" name="pr3" value="Less than 8 hours">
+                  <label for="pr3">Less than 8 hours</label>
+                  <input type="radio" id="pr3" name="pr3" value="Greater than or equal to 8">
+                  <label for="pr3">Greater than or equal to 8</label>
+                </div>
+              </div>
+              <div class="flex">
+                <div class="input-field1 dropdown" data-type="selectors" data-name="complication">
+                  <select aria-label="Complication" name="signup_compli" id="compli" title="Complication" required>
+                    <option value="" disabled selected>Any obstetric complication?</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                </div>
+                <div class="input-field1 dropdown" data-type="selectors" data-name="illness">
+                  <select aria-label="Illness" name="signup_ill" id="ill" title="Complication" required>
+                    <option value="" disabled selected>Child with congenital illness?</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <input type="submit" class="btn" name="Register" value="Sign up" />
+      </div>
+    </div>
+
+
+    </form>
+    </div>
+    <!-- SIGN UP FORM END -->
+
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

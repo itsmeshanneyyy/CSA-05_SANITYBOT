@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style_welcome.css') }}" />
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>SanityBot | Sanity</title>
+    <link rel="icon" href="{{ url_for('static', filename='/images/robot_logo.svg') }}" type="image">
+  </head>
+  <body>
+    {% with messages = get_flashed_messages(with_categories=true) %} 
+    {% if
+      messages %} {% for category, message in messages %} {% if category ==
+      'error' %}
+      <div class="alert-error" role="alert">
+        {{ message }}
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+      </div>
+      {% else %}
+      <div class="alert-success" role="alert">
+        {{ message }}
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+      </div>
+      {% endif %} {% endfor %} {% endif %} {% endwith %}
+    <main>
+       <!-- landingpage -->
+       <div class="wrapper light scroll-bar">
+        <header>
+          
+          <div class="container">
+            <div class="logo">
+              <img class="logo_img" src="{{ url_for('static', filename='/images/robot_logo.svg') }}" alt="logo">
+              <h3>SanityBot</h3>
+            </div>
+            <div class="links">
+              <ul class="main">
+                <li><a href="{{ url_for('views.home') }}" >Home</a></li>
+                <li><a href="{{ url_for('views.sanity') }}" style="color:#46A2FF">Sanity</a></li>
+                <li><a href="{{ url_for('views.aboutpostpartum') }}">Postpartum</a></li>
+                <li><a href="{{ url_for('views.selfhelp') }}">Trusted Websites</a></li>
+              </ul>
+              <ul>
+                <li class="dropdown">
+                  <a href="#"><i class="fa fa-user" aria-hidden="true"></i>  {{ user.firstname }} {{ user.lastname }}</a>
+                  <div class="dropdown-content">
+                    <a href="{{ url_for('views.profile') }}">View Profile</a>
+                    <!-- <a class="">Dark Mode</a> -->
+                    <a href="{{ url_for('auth.logout') }}">Logout</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="overlay"></div>
+
+            <div class="hamburger">
+              <div class="bar"></div>
+            </div>
+
+          </div>
+        </header>
+
+        <div class="content-area">
+          <div class="container1">
+            <div class="left center-text">
+              <div class="title">
+                <h3>Welcome to</h3>
+                <h1>SanityBot</h1>
+              </div>
+              <p class="text">
+                An Artificial Intelligence Chatbot for Postpartum 
+                Women that helps you in your psychological, 
+                emotional and social well-being. Sanity makes you 
+                feel heard without judgement. 
+              </p>
+
+              <!-- chatbot -->
+              <div>
+                {% if user.is_assess %}
+                <a href="{{ url_for('views.chat') }}" class="btn_form">Talk to Sanity</a>
+                {% else %}
+                <a href="#" class="btn_form" id="show-modal">Talk to Sanity</a>
+                {% endif %}
+
+                <div class="modal">
+                  <div class="modal-box">
+                    <div type="button" class="icon" id="hide-modal">
+                      <i class="fa fa-times"></i>
+                    </div>
+                    <img class="logo_img1" src="{{ url_for('static', filename='/images/robot_logo.svg') }}" alt="logo">
+                    <div class="modaltext">
+                      Hello There! I am Sanity, your AI friend. I know you’re excited to talk and meet me but before you have an interaction with me, I want you to answer first our initial assessment to know your condition. I hope you enjoy this little assessment. 
+                    </div>
+                    <a href="{{ url_for('views.chat') }}" class="btn_form" >Okay</a>
+                  </div>
+                </div>
+              </div>
+              <!-- end chatbot -->
+            </div>
+
+            <div class="right rindex">
+              <img src="{{ url_for('static', filename='/images/phone4.svg') }}" alt="Image" class="sanity">
+            </div>
+
+          </div>
+        </div>
+        <!-- landing page end -->        
+        <div class="content-area">
+          <div class="container1">
+            <div class="left">
+              <img src="{{ url_for('static', filename='/images/welcome1.svg') }}" alt="Image" class="sanity1">
+            </div>
+            <div class="right center-text">
+              <img src="{{ url_for('static', filename='/images/robot_logo.svg') }}" alt="Image" class="robot">
+              <div class="title">
+                <h1>Hello!</h1>
+              </div>
+              <p class="text3">
+                I am Sanity! Your AI friend that helps
+                you with your mental and emotional
+                well-being. I'm always here to listen
+                to make you feel better and cope with your daily stresses as a new
+                mother.
+              </p>
+            </div>
+          </div>
+        </div>
+       </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script>
+    $(document).ready(function(){
+    $('#show-modal').on('click', function(){
+      $('.modal').css({'visibility': 'visible', 'opacity': '1'});
+    });
+    $('.modal .modal-box .icon i').on('click', function(){
+      $('.modal').css({'visibility': 'hidden', 'opacity': '0'});
+      clearAll();
+    });
+  }); 
+    </script>
+  </body>
+</html>

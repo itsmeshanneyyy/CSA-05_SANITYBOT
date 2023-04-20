@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <title>Admin | Dashboard</title>
+    <link rel="icon" href="{{ url_for('static', filename='/images/robot_logo.svg') }}" type="image">
+    <link rel="stylesheet"
+        href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style_controlpanel.css') }}">
+</head>
+
+<body>
+
+    <input type="checkbox" id="nav-toggle">
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <div class="logo">
+                <img class="logo_img" src="{{ url_for('static', filename='/images/robot_logo.svg') }}" alt="logo">
+                <h2><span>Sanitybot</span></h2>
+            </div>
+        </div>
+        <!--Secciones-del-tablero-->
+        <div class="sidebar-menu">
+            <ul>
+                <li>
+                    <a href="{{ url_for('views.dashboard') }}" class="active"><span class="las la-home"></span>
+                        <span>Dashboard</span></a>
+                </li>
+                <li>
+                    <a href="{{ url_for('views.admin_profile') }}"><span class="las la-user"></span>
+                        <span>Manage Account</span></a>
+                </li>
+                <li>
+                    <a href="{{ url_for('views.admin_patients') }}"><span class="las la-book-medical"></span>
+                        <span>User's Information</span></a>
+                </li>
+                <li>
+                    <a href="{{ url_for('auth.adminlogout') }}"><span class="las la-sign-out-alt"></span>
+                        <span>Logout</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-content">
+        <header>
+            <h2>
+                <label for="nav-toggle">
+                    <span class="las la-bars"></span>
+                </label>
+            </h2>
+            <div class="search-wrapper">
+                <span class="las la-search"></span>
+                <input type="search" placeholder="Search" name="search" />
+            </div>
+            <div class="user-wrapper">
+                <div>
+                    <h3>Dashboard</h3>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!--Table-->
+            <div class="recent-grid">
+                <div class="projects">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>User's Maternal Mental Health Report</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table width="100%">
+                                    <thead>
+                                        <tr>
+                                            <td>ID</td>
+                                            <td>Name</td>
+                                            <td>Middlename</td>
+                                            <td>Lastname</td>
+                                            <td>Age</td>
+                                            <td>Address</td>
+                                            <td>Contact Number</td>
+                                            <td>Have you been previously diagnosed with a psychiatric condition?</td>
+                                            <td>Do you have a family history of psychiatric illness?</td>
+                                            <td>Currently smoking?</td>
+                                            <td>Currently with alcohol intake?</td>
+                                            <td>History of physical abuse?</td>
+                                            <td>History of sexual abuse?</td>
+                                            <td>Status of child?</td>
+                                            <td>Planned pregnancy?</td>
+                                            <td>Currently breastfeeding?</td>
+                                            <td>No. of Pregnancies</td>
+                                            <td>No. of Living Children</td>
+                                            <td>No. of Premature Births</td>
+                                            <td>No. of Miscarriage</td>
+                                            <td>OB Score</td>
+                                            <td>With Medical comorbidities?</td>
+                                            <td>Mode of Delivery</td>
+                                            <td>Any obstetric complication?</td>
+                                            <td>Child with congenital illness?</td>
+                                            <td>Date Submitted</td>
+                                            <td>Condition</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for user in users %}
+                                        <tr>
+                                            <td>{{user.id}}</td>
+                                            <td>{{user.firstname}}</td>
+                                            <td>{{user.middlename}}</td>
+                                            <td>{{user.lastname}}</td>
+                                            <td>{{user.age}}</td>
+                                            <td>{{user.address}}</td>
+                                            <td>{{user.contact}}</td>
+                                            <td>{{user.sdp1}}</td>
+                                            <td>{{user.sdp2}}</td>
+                                            <td>{{user.sdp3}}</td>
+                                            <td>{{user.sdp4}}</td>
+                                            <td>{{user.sdp5}}</td>
+                                            <td>{{user.sdp6}}</td>
+                                            <td>{{user.sdp7}}</td>
+                                            <td>{{user.sdp8}}</td>
+                                            <td>{{user.sdp9}}</td>
+                                            <td>{{user.numpreg}}</td>
+                                            <td>{{user.livechild}}</td>
+                                            <td>{{user.numpremature}}</td>
+                                            <td>{{user.nummiscarriage}}</td>
+                                            <td>{{user.obscore}}</td>
+                                            <td>{{user.comor}}</td>
+                                            <td>{{user.delivery}}</td>
+                                            <td>{{user.compli}}</td>
+                                            <td>{{user.ill}}</td>
+                                            <td>{{user.date_submitted}}</td>
+                                            <td>
+                                                {% if user.epds_score == 0 %}
+                                                <span class="status neutral"></span> {{user.epds_score}}
+                                                {% elif user.epds_score == 1 %}
+                                                <span class="status green"></span> {{user.epds_score}}
+                                                {% elif user.epds_score == 2 %}
+                                                <span class="status yellow"></span> {{user.epds_score}}
+                                                {% elif user.epds_score == 3 %}
+                                                <span class="status red"></span> {{user.epds_score}}
+                                                {% else %}
+                                                <span class="status neutral"></span> {{user.epds_score}}
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </div>
+    </main>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='/css/style_welcome.css') }}" />
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>SanityBot | Self Help</title>
+  <link rel="icon" href="{{ url_for('static', filename='/images/robot_logo.svg') }}" type="image">
+</head>
+
+<body>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if
+  messages %} {% for category, message in messages %} {% if category ==
+  'error' %}
+  <div class="alert-error" role="alert">
+    {{ message }}
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  </div>
+  {% else %}
+  <div class="alert-success" role="alert">
+    {{ message }}
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  </div>
+  {% endif %} {% endfor %} {% endif %} {% endwith %}
+  <main>
+    <!-- landingpage -->
+    <div class="wrapper light scroll-bar">
+      <header>
+
+        <div class="container">
+          <div class="logo">
+            <img class="logo_img" src="{{ url_for('static', filename='/images/robot_logo.svg') }}" alt="logo">
+            <h3>SanityBot</h3>
+          </div>
+          <div class="links">
+            <ul class="main">
+              <li><a href="{{ url_for('views.home') }}" >Home</a></li>
+              <li><a href="{{ url_for('views.sanity') }}">Sanity</a></li>
+              <li><a href="{{ url_for('views.aboutpostpartum') }}">Postpartum</a></li>
+              <li><a href="{{ url_for('views.selfhelp') }}" style="color:#46A2FF">Trusted Websites</a></li>
+            </ul>
+            <ul>
+              <li class="dropdown">
+                <a href="#"><i class="fa fa-user" aria-hidden="true"></i>  {{ user.firstname }} {{ user.lastname }}</a>
+                <div class="dropdown-content">
+                  <a href="{{ url_for('views.profile') }}">View Profile</a>
+                  <a href="{{ url_for('auth.logout') }}">Logout</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="overlay"></div>
+
+          <div class="hamburger">
+            <div class="bar"></div>
+          </div>
+
+        </div>
+      </header>
+      <div class="content-area">
+        <div class="title3">
+          <h2>Help yourself with these Institutions and Organizations</h2>
+          <div class="container2">
+            <div class="left">
+              <img src="{{ url_for('static', filename='/images/psi.png') }}" alt="Image" class="helplogo">
+            </div>
+            <div class="right">
+              <div class="title2">
+                <h3>Postpartum Support International (PSI)</h3>
+              </div>
+              <p class="text4">
+                Postpartum Support International (PSI) is a nonprofit organization that provides support, resources, and
+                education for families struggling with perinatal mood and anxiety disorders, including postpartum
+                depression. Their website offers resources for new mothers, partners, and healthcare providers. <a href='https://www.postpartum.net/' style="color:#46A2FF" target='_blank'>Click here</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content-area">
+        <div class="container3">
+          <div class="left">
+            <div class="title2">
+              <h3>Postpartum Depression</h3>
+            </div>
+            <p class="text4">
+              This website offers information about postpartum depression, including symptoms, risk factors, and
+              treatment options. It also provides a list of resources and support groups for mothers who are struggling
+              with postpartum depression. <a href='https://www.postpartumdepression.org/' style="color:#46A2FF" target='_blank'>Click here</a>
+            </p>
+          </div>
+          <div class="right rindex">
+            <img src="{{ url_for('static', filename='/images/ppd.png') }}" alt="Image" class="helplogo">
+          </div>
+        </div>
+      </div>
+      <div class="content-area">
+        <div class="container3">
+          <div class="left">
+            <img src="{{ url_for('static', filename='/images/bluedot.png') }}" alt="Image" class="helplogo">
+          </div>
+          <div class="right">
+            <div class="title2">
+              <h3>The Blue Dot Project</h3>
+            </div>
+            <p class="text4">
+              The Blue Dot Project is an initiative of Postpartum Support International that aims to raise awareness
+              about perinatal mental health and reduce stigma surrounding postpartum depression. Their website offers
+              information and resources for mothers, partners, and healthcare providers. <a href='https://www.thebluedotproject.org/' style="color:#46A2FF" target='_blank'>Click here</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="content-area">
+        <div class="container3">
+          <div class="left">
+            <div class="title2">
+              <h3>The National Institute of Mental Health</h3>
+            </div>
+            <p class="text4">
+              The NIMH offers information about postpartum depression, including research, statistics, and treatment
+              options. Their website also offers resources for finding help and support. <a href='https://www.nimh.nih.gov/' style="color:#46A2FF" target='_blank'>Click here</a>
+            </p>
+          </div>
+          <div class="right rindex">
+            <img src="{{ url_for('static', filename='/images/nih.png') }}" alt="Image" class="helplogo">
+          </div>
+        </div>
+      </div>
+      <div class="content-area">
+        <div class="container3">
+          <div class="left">
+            <img src="{{ url_for('static', filename='/images/apa.png') }}" alt="Image" class="helplogo">
+          </div>
+          <div class="right">
+            <div class="title2">
+              <h3>The American Psychological Association</h3>
+            </div>
+            <p class="text4">
+              The APA offers information and resources for mothers struggling with postpartum depression, including tips
+              for self-care and finding support. <a href='https://www.apa.org/' style="color:#46A2FF" target='_blank'>Click here</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="content-area">
+        <div class="container3">
+          <div class="left">
+            <div class="title2">
+              <h3>American Pregnancy Association</h3>
+            </div>
+            <p class="text4">
+              This website has an extensive section on postpartum depression that includes information on symptoms, risk
+              factors, and treatment options. They also have a list of support groups and hotlines. <a href='https://americanpregnancy.org/' style="color:#46A2FF" target='_blank'>Click here</a>
+            </p>
+          </div>
+          <div class="right rindex">
+            <img src="{{ url_for('static', filename='/images/apa2.png') }}" alt="Image" class="helplogo1">
+          </div>
+        </div>
+      </div>
+      <div class="content-area">
+        <div class="container3">
+          <div class="left">
+            <img src="{{ url_for('static', filename='/images/psc.png') }}" alt="Image" class="helplogo">
+          </div>
+          <div class="right">
+            <div class="title2">
+              <h3>The Postpartum Stress Center</h3>
+            </div>
+            <p class="text4">
+              This website offers online counseling services, educational resources, and support for women and families
+              struggling with perinatal mood and anxiety disorders. <a href='https://www.postpartumstress.com/' style="color:#46A2FF" target='_blank'>Click here</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="content-area">
+        <div class="container3">
+          <div class="left">
+            <div class="title2">
+              <h3>The Association for Behavioral and Cognitive Therapies</h3>
+            </div>
+            <p class="text4">
+              This organization has a directory of licensed therapists who specialize in cognitive behavioral therapy
+              (CBT), which is an evidence-based treatment for postpartum depression. <a href='https://www.abct.org/' style="color:#46A2FF" target='_blank'>Click here</a>
+            </p>
+          </div>
+          <div class="right rindex">
+            <img src="{{ url_for('static', filename='/images/abct.png') }}" alt="Image" class="helplogo">
+          </div>
+        </div>
+      </div>
+      <div class="content-area">
+        <div class="container3">
+          <div class="left">
+            <img src="{{ url_for('static', filename='/images/lifeline.png') }}" alt="Image" class="helplogo2">
+          </div>
+          <div class="right">
+            <div class="title2">
+              <h3>The National Suicide Prevention Lifeline</h3>
+            </div>
+            <p class="text4">
+              While postpartum depression does not necessarily lead to suicidal ideation or behavior, it's important to
+              know that help is available if you or a loved one is experiencing thoughts of suicide. The National
+              Suicide Prevention Lifeline offers free, confidential support 24/7 by phone or chat. <a href='https://suicidepreventionlifeline.org/' style="color:#46A2FF" target='_blank'>Click here</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="content-area">
+        <div class="container3">
+          <div class="left">
+            <div class="title2">
+              <h3>The Mayo Clinic</h3>
+            </div>
+            <p class="text4">
+              The Mayo Clinic provides a comprehensive overview of postpartum depression, including risk factors,
+              symptoms, and treatment options. They also offer advice for family members and friends who want to support
+              a loved one who is struggling. <a href='https://www.mayoclinic.org/' style="color:#46A2FF" target='_blank'>Click here</a>
+            </p>
+          </div>
+          <div class="right rindex">
+            <img src="{{ url_for('static', filename='/images/mayoclinic.png') }}" alt="Image" class="helplogo2">
+          </div>
+        </div>
+      </div>
+      <div class="content-area">
+        <div class="container3">
+          <div class="left">
+            <img src="{{ url_for('static', filename='/images/pdai.png') }}" alt="Image" class="helplogo">
+          </div>
+          <div class="right">
+            <div class="title2">
+              <h3>The Postpartum Depression Alliance of Illinois</h3>
+            </div>
+            <p class="text4">
+              This organization offers support groups, resources, and advocacy for women in Illinois who are
+              experiencing postpartum depression. They also offer a helpline for women and families who need immediate
+              support. <a href='https://ppdil.org/' style="color:#46A2FF" target='_blank'>Click here</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="content-area">
+        <div class="container3">
+          <div class="left">
+            <div class="title2">
+              <h3>Philippine Mental Health Association</h3>
+            </div>
+            <p class="text4">
+              The PMHA is a non-governmental organization that promotes mental health awareness and provides resources
+              for Filipinos who are struggling with mental health issues, including postpartum depression. They offer
+              counseling services, support groups, and educational resources. <a href='https://www.pmha.org.ph/' style="color:#46A2FF" target='_blank'>Click here</a>
+            </p>
+          </div>
+          <div class="right rindex">
+            <img src="{{ url_for('static', filename='/images/pmha.png') }}" alt="Image" class="helplogo2">
+          </div>
+        </div>
+      </div>
+      <div class="content-area">
+        <div class="container3">
+          <div class="left">
+            <img src="{{ url_for('static', filename='/images/mommymundo.png') }}" alt="Image" class="helplogo">
+          </div>
+          <div class="right">
+            <div class="title2">
+              <h3>Mommy Mundo</h3>
+            </div>
+            <p class="text4">
+              Mommy Mundo is a community for mothers in the Philippines that provides information and resources on a
+              variety of topics, including postpartum depression. They offer online support groups, educational
+              resources, and a directory of healthcare providers. <a href='https://mommymundo.com/' style="color:#46A2FF" target='_blank'>Click here</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="content-area">
+        <div class="container3">
+          <div class="left">
+            <div class="title2">
+              <h3>Department of Health Mental Health Program</h3>
+            </div>
+            <p class="text4">
+              The Department of Health in the Philippines has a mental health program that provides resources and
+              support for individuals who are struggling with mental health issues, including postpartum depression.
+              They offer free counseling services, a helpline, and educational resources. <a href='https://doh.gov.ph/national-mental-health-program' style="color:#46A2FF" target='_blank'>Click here</a>
+            </p>
+          </div>
+          <div class="right rindex">
+            <img src="{{ url_for('static', filename='/images/doh.png') }}" alt="Image" class="helplogo2">
+          </div>
+        </div>
+      </div>
+      <div class="content-area">
+        <div class="container3">
+          <div class="left">
+            <img src="{{ url_for('static', filename='/images/psi.png') }}" alt="Image" class="helplogo">
+          </div>
+          <div class="right">
+            <div class="title2">
+              <h3>Postpartum Support International Philippines Chapter</h3>
+            </div>
+            <p class="text4">
+              This chapter of the international organization Postpartum Support International provides support and
+              resources for women in the Philippines who are struggling with perinatal mood and anxiety disorders,
+              including postpartum depression. They offer a directory of local resources and trained professionals who
+              specialize in treating perinatal mood disorders. <a href='https://www.postpartum.net/get-help/international/resource/resource_type/philippines/' style="color:#46A2FF" target='_blank'>Click here</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="content-area">
+        <div class="container3">
+          <div class="left">
+            <div class="title2">
+              <h3>The Medical City</h3>
+            </div>
+            <p class="text4">
+              The Medical City is a hospital in the Philippines that offers a perinatal psychiatry program for women who
+              are struggling with perinatal mood and anxiety disorders, including postpartum depression. They offer
+              inpatient and outpatient services, as well as counseling and support groups. <a href='https://www.themedicalcity.com/' style="color:#46A2FF" target='_blank'>Click here</a>
+            </p>
+          </div>
+          <div class="right rindex">
+            <img src="{{ url_for('static', filename='/images/medicalcity.png') }}" alt="Image" class="helplogo1">
+          </div>
+        </div>
+      </div>
+      <div class="content-area">
+        <div class="container3">
+          <div class="left">
+            <img src="{{ url_for('static', filename='/images/mhph.png') }}" alt="Image" class="helplogo">
+          </div>
+          <div class="right">
+            <div class="title2">
+              <h3>Mental Health PH</h3>
+            </div>
+            <p class="text4">
+              Mental Health PH is a website that provides resources and information on mental health issues in the
+              Philippines, including postpartum depression. They offer a directory of mental health professionals, as
+              well as educational resources and support groups. <a href='https://mentalhealthph.org/' style="color:#46A2FF" target='_blank'>Click here</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="content-area">
+        <div class="container3">
+          <div class="left">
+            <div class="title2">
+              <h3>The Parenting Emporium</h3>
+            </div>
+            <p class="text4">
+              The Parenting Emporium is a community for parents in the Philippines that offers resources and support on
+              a variety of topics, including postpartum depression. They offer online support groups, workshops, and
+              educational resources. <a href='https://theparentingemporium.com/' style="color:#46A2FF" target='_blank'>Click here</a>
+            </p>
+          </div>
+          <div class="right rindex">
+            <img src="{{ url_for('static', filename='/images/pe.png') }}" alt="Image" class="helplogo1">
+          </div>
+        </div>
+      </div>
+      <div class="content-area">
+        <div class="container3">
+          <div class="left">
+            <img src="{{ url_for('static', filename='/images/pogs.png') }}" alt="Image" class="helplogo3">
+          </div>
+          <div class="right">
+            <div class="title2">
+              <h3>The Philippine Obstetrical and Gynecological Society</h3>
+            </div>
+            <p class="text4">
+              The Philippine Obstetrical and Gynecological Society is a professional organization for obstetricians and
+              gynecologists in the Philippines. They provide resources and education on a variety of women's health
+              issues, including postpartum depression. <a href='https://theparentingemporium.com/' style="color:#46A2FF" target='_blank'>Click here</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="content-area">
+        <div class="container3">
+          <div class="left">
+            <div class="title2">
+              <h3>MindNation</h3>
+            </div>
+            <p class="text4">
+              MindNation is an online mental health platform that provides counseling services, resources, and
+              educational content for individuals in the Philippines who are struggling with mental health issues,
+              including postpartum depression. <a href='https://www.mindnation.com/?lang=en' style="color:#46A2FF" target='_blank'>Click here</a>
+            </p>
+          </div>
+          <div class="right rindex">
+            <img src="{{ url_for('static', filename='/images/mindnation.png') }}" alt="Image" class="helplogo2">
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+    <!-- landing page end -->
+    </div>
+  </main>
+</body>
+
+</html>

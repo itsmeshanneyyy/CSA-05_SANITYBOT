@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style_chat.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <script type="text/javascript" type="module" defer src="{{ url_for('static', filename='old-chat.js') }}"></script>
+    <script type="text/javascript" type="module" defer
+        src="{{ url_for('static', filename='chat-history.js') }}"></script>
+    <script type="text/javascript" type="module" defer src="{{ url_for('static', filename='chat.js') }}"></script>
+    <!-- <script type="text/javascript" defer src="{{ url_for('static', filename='app-chat.js') }}"></script> -->
+    <script defer src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <title>SanityBot | Talk to Sanity</title>
+    <link rel="icon" href="{{ url_for('static', filename='/images/robot_logo.svg') }}" type="image">
+</head>
+
+<body>
+    <div style="height: 100vh;">
+
+        <header>
+            <div class="container">
+                <div class="logo">
+                    <img class="logo_img" src="{{ url_for('static', filename='/images/robot_logo.svg') }}" alt="logo">
+                    <h3>SanityBot</h3>
+                </div>
+                <div class="links">
+                    <ul class="main">
+                        <li><a href="{{ url_for('views.home2') }}">Home</a></li>
+                        <li><a href="{{ url_for('views.sanity') }}">Sanity</a></li>
+                        <li><a href="{{ url_for('views.aboutpostpartum') }}">Postpartum</a></li>
+                        <li><a href="{{ url_for('views.selfhelp') }}">Trusted Websites</a></li>
+                    </ul>
+                    <ul>
+                        <li class="dropdown">
+                            <a href="#"><i class="fa fa-user" aria-hidden="true"></i> {{ data.user.firstname }} {{
+                                data.user.lastname }}</a>
+                            <div class="dropdown-content">
+                                <a href="{{ url_for('views.profile') }}">View Profile</a>
+                                <a href="{{ url_for('auth.logout') }}">Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="overlay"></div>
+                <div class="hamburger">
+                    <div class="bar"></div>
+                </div>
+            </div>
+        </header>
+        <div class="chatbox">
+            <div class="chatbox__support">
+                <div class="chatbox__header">
+                    <div type="button" class="icon" id="hide-modal">
+                        {% if data.user.is_assess %}
+                        <!-- <a href="{{ url_for('views.home') }}"><i class="fa fa-times"></i></a> -->
+                        <a href="#" id="show-modal"><i class="fa fa-times"></i></a>
+                        {% else %}
+                        <a href="#" id="show-modal"><i class="fa fa-times"></i></a>
+                        {% endif %}
+                    </div>
+                    <div class="chatbox__image--header">
+                        <img src="{{ url_for('static', filename='/images/robot_logo.svg') }}" alt="image">
+                    </div>
+                    <div class="chatbox__content--header">
+                        <h1 class="chatbox__description--header">I will make you feel heard.</h1>
+                    </div>
+                </div>
+                <div>
+                    <dialog class="modal" id="modal" style="position:fixed; height: 55%; width:30%; top:20%; left:35%;">
+                        <h1 class="title1">{{ data.user.firstname }}, you are ending this conversation.</h1>
+                        <p class="modaltext">If you end this conversation, you will not be able to return to this chat
+                            again. You can of course always start a new chat from the homepage.</p>
+                        <a href="#" class="btn_form btn_yes save_messages_yes">RESUME CONVERSATION</a>
+                        <a href="#" class="btn_form btn_no save_messages_no">END CONVERSATION</a>
+                    </dialog>
+                </div>
+                <div class="chatbox__messages">
+                </div>
+                <div class='chat_preset'>
+                    <div class='preset-chat'>1</div>
+                    <div class='preset-chat'>2</div>
+                    <div class='preset-chat'>3</div>
+                    <div class='preset-chat'>4</div>
+                </div>
+                <form id="chat_form">
+                    <div class='chat_input'>
+                        <input type="text" id="user_input" placeholder="Write a message...">
+                        <div class="chatbox__send--footer send__button">
+                            <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="chatbox__button">
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $SCRIPT_ROOT = {{ request.script_root | tojson }};
+        $(document).ready(function () {
+            $('#show-modal').on('click', function () {
+                $('.modal').css({ 'visibility': 'visible', 'opacity': '1' });
+            });
+            $('.modal .modal-box .icon i').on('click', function () {
+                $('.modal').css({ 'visibility': 'hidden', 'opacity': '0' });
+            });
+        }); 
+    </script>
+    <script>
+        $SCRIPT_ROOT = {{ request.script_root | tojson }};
+        $(document).ready(function () {
+            $('#show-modal').on('click', function () {
+                $('.modal').css({ 'visibility': 'visible', 'opacity': '1' });
+            });
+            $('.modal .modal-box .icon i').on('click', function () {
+                $('.modal').css({ 'visibility': 'hidden', 'opacity': '0' });
+            });
+            $('.btn_yes_no').on('click', function () {
+                $('.modal').css({ 'visibility': 'hidden', 'opacity': '0' });
+                clearAll();
+            });
+        }); 
+    </script>
+</body>
+
+</html>

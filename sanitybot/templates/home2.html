@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style_chatbot.css') }}" />
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>SanityBot | Welcome Back</title>
+    <link rel="icon" href="{{ url_for('static', filename='/images/robot_logo.svg') }}" type="image">
+  </head>
+  <body>
+    {% with messages = get_flashed_messages(with_categories=true) %} 
+    {% if
+      messages %} {% for category, message in messages %} {% if category ==
+      'error' %}
+      <div class="alert-error" role="alert">
+        {{ message }}
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+      </div>
+      {% else %}
+      <div class="alert-success" role="alert">
+        {{ message }}
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+      </div>
+      {% endif %} {% endfor %} {% endif %} {% endwith %}
+    <main>
+       <!-- landingpage -->
+       <div class="wrapper light">
+        <header>
+          <div class="container">
+            <div class="logo">
+              <img class="logo_img" src="{{ url_for('static', filename='/images/robot_logo.svg') }}" alt="logo">
+              <h3>SanityBot</h3>
+            </div>
+            <div class="links">
+              <ul class="main">
+                <li><a href="{{ url_for('views.home') }}" style="color:#46A2FF">Home</a></li>
+                <li><a href="{{ url_for('views.sanity') }}">Sanity</a></li>
+                <li><a href="{{ url_for('views.aboutpostpartum') }}">Postpartum</a></li>
+                <li><a href="{{ url_for('views.selfhelp') }}">Trusted Websites</a></li>
+              </ul>
+              <ul>
+                <li class="dropdown">
+                  <a href="#"><i class="fa fa-user" aria-hidden="true"></i>  {{ user.firstname }} {{ user.lastname }}</a>
+                  <div class="dropdown-content">
+                    <a href="{{ url_for('views.profile') }}">View Profile</a>
+                    <a href="{{ url_for('auth.logout') }}">Logout</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="overlay"></div>
+            <div class="hamburger">
+              <div class="bar"></div>
+            </div>
+          </div>
+        </header>
+
+        <div class="content-area">
+          <div class="container">
+            <div class="left">
+              <div class="title">
+                <h3>Are you not happy</h3>
+                <h3>talking to</h3>
+                <h1>Sanity?</h1>
+              </div>
+              <p class="text">
+                An Artificial Intelligence Chatbot that helps you in 
+                your psychological, emotional and social well-being. 
+                Sanity makes you feel heard.
+              </p>
+
+              <!-- chatbot -->
+              <div>
+                {% if user.is_assess %}
+                <a href="{{ url_for('views.chat') }}" class="btn_form">Start a new conversation</a>
+                {% else %}
+                <a href="#" class="btn_form" id="show-modal">Start a new conversation</a>
+                {% endif %}
+
+                <div class="modal">
+                  <div class="modal-box">
+                    <div type="button" class="icon" id="hide-modal">
+                      <i class="fa fa-times"></i>
+                    </div>
+                    <img class="logo_img1" src="{{ url_for('static', filename='/images/robot_logo.svg') }}" alt="logo">
+                    <div class="modaltext">
+                      Hello There! I am Sanity, your AI friend. I hope you'll find joy talking to me. Thank you! 
+                    </div>
+                    <a href="{{ url_for('views.chat') }}" class="btn_form" >Okay</a>
+                  </div>
+                </div>
+              </div>
+              <!-- end chatbot -->
+
+            </div>
+            <div class="right">
+              <img src="{{ url_for('static', filename='/images/homepage.svg') }}" alt="Image" class="sanity">
+            </div>
+          </div>
+        </div>
+        <!-- landing page end -->
+      </div>
+    </main>
+  </main>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script>
+    $(document).ready(function(){
+    $('#show-modal').on('click', function(){
+      $('.modal').css({'visibility': 'visible', 'opacity': '1'});
+    });
+    $('.modal .modal-box .icon i').on('click', function(){
+      $('.modal').css({'visibility': 'hidden', 'opacity': '0'});
+      clearAll();
+    });
+  }); 
+    </script>
+  </body>
+</html>

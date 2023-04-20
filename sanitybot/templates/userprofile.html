@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='/css/style_profile.css') }}" />
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>SanityBot | Profile</title>
+  <link rel="icon" href="{{ url_for('static', filename='/images/robot_logo.svg') }}" type="image">
+</head>
+
+<body>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if
+  messages %} {% for category, message in messages %} {% if category ==
+  'error' %}
+  <div class="alert-error" role="alert">
+    {{ message }}
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  </div>
+  {% else %}
+  <div class="alert-success" role="alert">
+    {{ message }}
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  </div>
+  {% endif %} {% endfor %} {% endif %} {% endwith %}
+  <main>
+
+    <!-- profilepage -->
+    <div class="wrapper light">
+      <header>
+        <div class="container">
+          <div class="logo">
+            <img class="logo_img" src="{{ url_for('static', filename='/images/robot_logo.svg') }}" alt="logo">
+            <h3>SanityBot</h3>
+          </div>
+          <div class="links">
+            <ul class="main">
+              <li><a href="{{ url_for('views.home') }}">Home</a></li>
+              <li><a href="{{ url_for('views.sanity') }}">Sanity</a></li>
+              <li><a href="{{ url_for('views.aboutpostpartum') }}">Postpartum</a></li>
+              <li><a href="{{ url_for('views.selfhelp') }}">Trusted Websites</a></li>
+            </ul>
+            <ul>
+              <li class="dropdown">
+                <a href="#" style="color:#46A2FF"><i class="fa fa-user" aria-hidden="true"></i> {{ user.firstname }} {{
+                  user.lastname }}</a>
+                <div class="dropdown-content">
+                  <a href="{{ url_for('views.profile') }}">View Profile</a>
+                  <a href="{{ url_for('auth.logout') }}">Logout</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="overlay"></div>
+
+          <div class="hamburger">
+            <div class="bar"></div>
+          </div>
+
+        </div>
+      </header>
+
+      <div class="container1 scroll-bar">
+        <form action="" method="post">
+          <div class="row">
+            <div class="col">
+              <h3 class="title">User Profile</h3>
+              <div class="flex">
+                <div class="inputBox1">
+                  <span></span>
+                  <span>User ID :</span>
+                  <input type="text" name="id" value="{{ user.id }}" class="user_id" readonly>
+                </div>
+                <div class="inputBox">
+                  <span></span>
+                  <span>First name :</span>
+                  <input type="text" placeholder="First name" name="firstname" value="{{ user.firstname }}" required>
+                </div>
+                <div class="inputBox">
+                  <span></span>
+                  <span>Middle name :</span>
+                  <input type="text" placeholder="Middle name" name="middlename" value="{{ user.middlename }}" required>
+                </div>
+                <div class="inputBox">
+                  <span></span>
+                  <span>Last name :</span>
+                  <input type="text" placeholder="Last name" name="lastname" value="{{ user.lastname }}" required>
+                </div>
+              </div>
+              <div class="flex">
+                <div class="inputBox">
+                  <span>Age :</span>
+                  <input type="text" placeholder="Age" name="age" value="{{ user.age }}" required>
+                </div>
+                <div class="inputBox">
+                  <span>Email :</span>
+                  <input type="text" placeholder="Email" name="email" value="{{ user.email }}" readonly required>
+                </div>
+              </div>
+              <div class="flex">
+                <div class="inputBox">
+                  <span>Contact Number :</span>
+                  <input type="text" placeholder="Contact Number" name="contact" value="{{ user.contact }}" required>
+                </div>
+                <div class="inputBox">
+                  <span>Marital Status :</span>
+                  <input data-type="selectors" data-name="marital" name="marital" value="{{ user.marital }}" required>
+                </div>
+              </div>
+              <div class="inputBox">
+                <span>Complete Address :</span>
+                <input type="text" placeholder="Street Number - Barangay - Province" name="address"
+                  value="{{ user.address }}" required>
+              </div>
+              <h3 class="title1">Socio-Demographic Profile</h3>
+              <div class="flex">
+                <div class="inputBox">
+                  <span>Educational Attainment :</span>
+                  <input data-type="selectors" data-name="educ" name="educ" value="{{ user.educ }}" readonly required>
+                </div>
+                <div class="inputBox">
+                  <span>Employment Status :</span>
+                  <input data-type="selectors" data-name="employ" name="employ" value="{{ user.employ }}" readonly required>
+                </div>
+                <div class="inputBox">
+                  <span>Family Monthly Income :</span>
+                  <input data-type="selectors" data-name="income" name="income" value="{{ user.income }}" readonly required>
+                </div>
+              </div>
+              <div class="inputBox">
+                <span>Have you been previously diagnosed with a psychiatric condition?</span>
+                <input placeholder="" name="sdp1" value="{{ user.sdp1 }}" readonly required>
+              </div>
+              <div class="inputBox">
+                <span>Do you have a family history of psychiatric illness?</span>
+                <input placeholder="" name="sdp2" value="{{ user.sdp2 }}" readonly required>
+              </div>
+              <div class="flex">
+                <div class="inputBox">
+                  <span>Currently smoking?</span>
+                  <input placeholder="" name="sdp3" value="{{ user.sdp3 }}" readonly required>
+                </div>
+                <div class="inputBox">
+                  <span>Currently with alcohol intake?</span>
+                  <input placeholder="" name="sdp4" value="{{ user.sdp4 }}" readonly required>
+                </div>
+              </div>
+              <div class="flex">
+                <div class="inputBox">
+                  <span>History of physical abuse?</span>
+                  <input placeholder="" name="sdp5" value="{{ user.sdp5 }}" readonly required>
+                </div>
+                <div class="inputBox">
+                  <span>History of sexual abuse?</span>
+                  <input placeholder="" name="sdp6" value="{{ user.sdp6 }}" readonly required>
+                </div>
+              </div>
+              <div class="flex">
+                <div class="inputBox">
+                  <span>Status of child?</span>
+                  <input placeholder="" name="sdp7" value="{{ user.sdp7 }}" readonly required>
+                </div>
+                <div class="inputBox">
+                  <span>Planned pregnancy?</span>
+                  <input placeholder="" name="sdp8" value="{{ user.sdp8 }}" readonly required>
+                </div>
+                <div class="inputBox">
+                  <span>Currently breastfeeding?</span>
+                  <input placeholder="" name="sdp9" value="{{ user.sdp9 }}" readonly required>
+                </div>
+              </div>
+              <h3 class="title1">Pregnancy Records</h3>
+              <div class="flex">
+                <div class="inputBox">
+                  <span>No. of Pregnancies :</span>
+                  <input type="number" placeholder="No. of Pregnancies" name="numpreg" value="{{ user.numpreg }}" readonly required>
+                </div>
+                <div class="inputBox">
+                  <span>No. of Living Children :</span>
+                  <input type="number" placeholder="No. of Livin Children" name="livechild" value="{{ user.livechild }}" readonly required>
+                </div>
+                <div class="inputBox">
+                  <span>No. of Premature Births :</span>
+                  <input type="number" placeholder="No. of Premature Births" name="numpremature" value="{{ user.numpremature }}" readonly required>
+                </div>
+                <div class="inputBox">
+                  <span>No. of Miscarriage :</span>
+                  <input type="number" placeholder="No. of Miscarriage" name="nummiscarriage" value="{{ user.nummiscarriage }}" readonly required>
+                </div>
+              </div>
+              <div class="flex">
+                <div class="inputBox">
+                  <span>OB Score :</span>
+                  <input type="number" placeholder="OB Score" name="obscore" value="{{ user.obscore }}" readonly required>
+                </div>
+                <div class="inputBox">
+                  <span>With Medical comorbidities?</span>
+                  <input data-type="selectors" data-name="comorbidities" name="comor" value="{{ user.comor }}" readonly required>
+                </div>
+                <div class="inputBox">
+                  <span>Mode of Delivery</span>
+                  <input data-type="selectors" data-name="delivery" name="delivery" value="{{ user.delivery }}"
+                  readonly required>
+                </div>
+              </div>
+              <div class="flex">
+                <div class="inputBox">
+                  <span>Any obstetric complication?</span>
+                  <input data-type="selectors" data-name="complication" name="compli" value="{{ user.compli }}" readonly required>
+                </div>
+                <div class="inputBox">
+                  <span>Child with congenital illness?</span>
+                  <input data-type="selectors" data-name="illness" name="ill" value="{{ user.ill }}"
+                  readonly required>
+                </div>
+              </div>
+              <h4 class="title2">If Vaginal delivery :</h4>
+              <div class="flex">
+                <div class="inputBox">
+                  <span>Induction of labor?</span>
+                  <input placeholder="" name="pr1" value="{{ user.pr1 }}" readonly required>
+                </div>
+                <div class="inputBox">
+                  <span>Epidural anesthesia given?</span>
+                  <input placeholder="" name="pr2" value="{{ user.pr2 }}" readonly required>
+                </div>
+                <div class="inputBox">
+                  <span>Hours of labor</span>
+                  <input placeholder="" name="pr3" value="{{ user.pr3 }}" readonly required>
+                </div>
+              </div>
+
+
+              <div class="flex-button">
+                <input type="submit" value="Save Changes" class="submit-btn" name="general_save">
+                <a href="{{ url_for('views.profile_security') }}" class="btnChange">Change Password</a>
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+      <!-- profile page end -->
+    </div>
+  </main>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="../static/app-chatbot.js"></script>
+  <script>
+
+    $(document).ready(function () {
+      $('.dropdown').click(function () {
+        $(this).children('.dropdown-content').toggle();
+      });
+
+      $(document).click(function (event) {
+        if (!$(event.target).closest('.dropdown').length) {
+          $('.dropdown-content').hide();
+        }
+      });
+    });
+
+  </script>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if
+  messages %} {% for category, message in messages %} {% if category ==
+  'error' %}
+  <div class="alert-error" role="alert">
+    {{ message }}
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  </div>
+  {% else %}
+  <div class="alert-success" role="alert">
+    {{ message }}
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  </div>
+  {% endif %} {% endfor %} {% endif %} {% endwith %}
+</body>
+
+</html>

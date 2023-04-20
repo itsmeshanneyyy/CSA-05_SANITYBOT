@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}" />
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>SanityBot | Log in</title>
+  <link rel="icon" href="{{ url_for('static', filename='/images/robot_logo.svg') }}" type="image">
+
+</head>
+
+
+<body>
+  <!-- LOADING HERE -->
+  <div id="loading" data-isloading="true" style="background-color:#ffffff; width:100vw; height:100vh;">
+    <div style="position:absolute; top:27%; right:50%; transform:translate(50%, -50%); z-index:100; ">
+      <img class="sanitybot_img" src="{{ url_for('static', filename='/images/sanitybot_logo.svg') }}" alt="logo">
+      <h2 class="tagline">An AI chatbot that makes you feel heard</h2>
+    </div>
+  </div>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if
+  messages %} {% for category, message in messages %} {% if category ==
+  'error' %}
+  <div class="alert-error" role="alert">
+    {{ message }}
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  </div>
+  {% else %}
+  <div class="alert-success" role="alert">
+    {{ message }}
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  </div>
+  {% endif %} {% endfor %} {% endif %} {% endwith %}
+  <!-- main -->
+  <main>
+    <!-- landingpage -->
+    <div class="wrapper light">
+      <header>
+        <div class="container1">
+          <div class="wrapper2">
+            <div class="logo">
+              <img class="logo_img" src="{{ url_for('static', filename='/images/robot_logo.svg') }}" alt="logo">
+              <h3>SanityBot</h3>
+            </div>
+            <div class="links">
+              <ul class="main">
+                <li><a href="{{ url_for('views.welcome') }}">Welcome</a></li>
+                <li><a href="{{ url_for('views.postpartum') }}">Postpartum</a></li>
+                <li><a href="{{ url_for('auth.register') }}" style="color:#46A2FF">Sign Up</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="overlay"></div>
+
+          <div class="hamburger">
+            <div class="bar"></div>
+          </div>
+
+        </div>
+      </header>
+
+      <div class="container">
+        <div class="forms-container">
+          <div class="signin-signup">
+
+            <!-- SIGNIN FORM -->
+            <form action="" method="POST" class="sign-in-form">
+              <img class="login_img" src="{{ url_for('static', filename='/images/sanitybot_logo.svg') }}" alt="logo">
+              <h2 class="title">Log in</h2>
+              <div class="input-field">
+                <i class="fas fa-user"></i>
+                <input type="text" placeholder="Email Address" name="email" minlength="5" required />
+              </div>
+              <div class="input-field">
+                <i class="fas fa-lock"></i>
+                <input type="password" placeholder="Password" name="password" minlength="6" required />
+              </div>
+              <input type="submit" class="btn" name="signin" value="Login" />
+              <p style="display: flex;justify-content: center;align-items: center;margin-top: 20px;"><a
+                  href="{{ url_for('auth.forgotpassword') }}" style="color: #4590ef; text-decoration: none" ;>Forgot
+                  Password?</a></p>
+            </form>
+            <!-- SIGNIN FORM END -->
+          </div>
+
+
+          <!-- CONTENT FORM -->
+          <div class="panels-container">
+            <div class="panel left-panel">
+              <img src="{{ url_for('static', filename='/images/login.svg') }}" class="image" alt="" />
+            </div>
+          </div>
+
+          <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+
+          <!-- LOADING HERE -->
+          <script>
+            const loadingElement = document.querySelector("#loading");
+            if (loadingElement.getAttribute("data-isloading") === "true") {
+              setTimeout(() => { loadingElement.style.display = "none"; }, 1000)
+            }
+          </script>
+</body>
+
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style_welcome.css') }}" />
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>SanityBot | Postpartum</title>
+    <link rel="icon" href="{{ url_for('static', filename='/images/robot_logo.svg') }}" type="image">
+  </head>
+  <body>
+    {% with messages = get_flashed_messages(with_categories=true) %} 
+    {% if
+      messages %} {% for category, message in messages %} {% if category ==
+      'error' %}
+      <div class="alert-error" role="alert">
+        {{ message }}
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+      </div>
+      {% else %}
+      <div class="alert-success" role="alert">
+        {{ message }}
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+      </div>
+      {% endif %} {% endfor %} {% endif %} {% endwith %}
+    <main>
+       <!-- landingpage -->
+       <div class="wrapper light scroll-bar">
+        <header>
+          
+          <div class="container">
+            <div class="logo">
+              <img class="logo_img" src="{{ url_for('static', filename='/images/robot_logo.svg') }}" alt="logo">
+              <h3>SanityBot</h3>
+            </div>
+            <div class="links">
+              <ul class="main">
+                <li><a href="{{ url_for('views.home') }}" >Home</a></li>
+                <li><a href="{{ url_for('views.sanity') }}">Sanity</a></li>
+                <li><a href="{{ url_for('views.aboutpostpartum') }}" style="color:#46A2FF">Postpartum</a></li>
+                <li><a href="{{ url_for('views.selfhelp') }}">Trusted Websites</a></li>
+              </ul>
+              <ul>
+                <li class="dropdown">
+                  <a href="#"><i class="fa fa-user" aria-hidden="true"></i>  {{ user.firstname }} {{ user.lastname }}</a>
+                  <div class="dropdown-content">
+                    <a href="{{ url_for('views.profile') }}">View Profile</a>
+                    <a href="{{ url_for('auth.logout') }}">Logout</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="overlay"></div>
+
+            <div class="hamburger">
+              <div class="bar"></div>
+            </div>
+
+          </div>
+        </header>
+      <div class="content-area">
+          <div class="container2">
+            <div class="left">
+              <img src="{{ url_for('static', filename='/images/motherbaby.svg') }}" alt="Image" class="motherbaby">
+            </div>
+            <div class="right">
+              <div class="title1">
+                <h1>What is Maternal Health?</h1>
+              </div>
+              <p class="text1">
+                Maternal health is described as the health and well-being of 
+                a woman throughout its pregnancy, childbirth and postnatal 
+                period that involves the states of women’s physical, mental, 
+                emotional, and social health aspects.
+              </p>
+              <div class="title1">
+              <h3>Why is it important?</h3>
+              </div>
+              <p class="text1">
+                Access to quality maternal healthcare not only ensures a 
+                mother's health, but it also helps to ensure the health of her
+                newborn child and the rest of her family.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="content-area">
+          <div class="container2">
+            <div class="left">
+              <div class="title1">
+                <h1>What is Postpartum Depression?</h1>
+              </div>
+              <p class="text1">
+                PPD is a complex mix of physical, emotional, 
+                and behavioral changes that occur in some 
+                women after giving birth. According to the 
+                DSM-5, a manual used to diagnose mental 
+                disorders, PPD is a form of major depression 
+                that begins within 4 weeks after delivery.
+              </p>
+            </div>
+            <div class="right rindex">
+              <img src="{{ url_for('static', filename='/images/sademoji.svg') }}" alt="Image" class="sanity">
+            </div>
+          </div>
+        </div>
+            <div class="content-area">
+              <div class="container2">
+                <div class="left">
+                  <img src="{{ url_for('static', filename='/images/motherdaugh.svg') }}" alt="Image" class="motherdaugh">
+                </div>
+                <div class="right">
+                  <div class="title1">
+                    <h1>Postpartum Depression Treatment</h1>
+                  </div>
+                  <p class="text1">
+                    Postpartum depression is treated differently 
+                    depending on the severity of the symptoms. 
+                    Anti-anxiety or antidepressant medications, 
+                    psychotherapy, and participation in a support 
+                    group for emotional support and education are 
+                    all treatment options.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="content-area">
+              <div class="container2">
+                <div class="left">
+                  <div class="title1">
+                    <h1>Types of Postpartum Depression</h1>
+                  </div>
+                  <p class="text1">
+                    Three terms are used to describe the mood 
+                    changes that women can experience after 
+                    giving birth:
+                  </p>
+                  <ol class="text2">1. Baby Blues</ol>
+                  <ol class="text2">2. Postpartum Depression (PPD)</ol>
+                  <ol class="text2">3. Postpartum Psychosis</ol>
+                </div>
+                <div class="right rindex">
+                  <img src="{{ url_for('static', filename='/images/motherchild.svg') }}" alt="Image" class="sanity">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- landing page end -->        
+       </div>
+    </main>
+  </body>
+</html>
